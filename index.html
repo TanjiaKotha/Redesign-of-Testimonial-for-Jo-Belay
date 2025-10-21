@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jo Bealey - Testimonials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <style>
+      :root {
+        /* **KEY CHANGE**: Updated to a dark blue brand color scheme */
+        --brand-color: #1ea1a1; /* Blue-500 */
+        --brand-dark: #32c0c0; /* Blue-600 */
+        --brand-light: #eff6ff; /* Blue-50 */
+        --text-dark: #000;
+        --text-light: #64748b;
+        --bg-color: #ffffff;
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07),
+          0 2px 4px -2px rgba(0, 0, 0, 0.07);
+        --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -4px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.7;
+        color: var(--text-dark);
+        background-color: var(--bg-color);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.7),
+            rgba(255, 255, 255, 0.85)
+          ),
+          url("asset/image.png");
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-size: 40% auto;
+        background-attachment: fixed;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .testimonials-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px 0;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .testimonials-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+
+      .testimonials-header h2 {
+        font-size: 2.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .testimonials-header h2:after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          var(--brand-color),
+          var(--brand-dark)
+        );
+        border-radius: 2px;
+      }
+
+      .testimonials-header p {
+        font-size: 1.15rem;
+        color: var(--text-light);
+        max-width: 650px;
+        margin: 30px auto 0;
+        line-height: 1.8;
+      }
+
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        min-height: 0;
+      }
+
+      .swiper {
+        width: 100%;
+        padding: 50px 0 !important;
+      }
+
+      .swiper-wrapper {
+        align-items: center;
+      }
+
+      .swiper-slide {
+        height: auto;
+        opacity: 0.4;
+        transform: scale(0.88);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+      }
+
+      .swiper-slide-active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .testimonial-card {
+        background: var(--bg-color);
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: var(--card-shadow);
+        transition: box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #f1f5f9;
+        overflow: hidden;
+        height: 100%;
+        max-height: 400px;
+      }
+
+      .swiper-slide-active .testimonial-card {
+        box-shadow: var(--card-shadow-hover);
+      }
+
+      .testimonial-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .testimonial-content::before {
+        content: "“";
+        position: absolute;
+        top: -20px;
+        left: -15px;
+        font-size: 6rem;
+        color: var(--brand-dark);
+        font-family: Georgia, serif;
+        z-index: -1;
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 25px;
+        flex-grow: 1;
+        color: #000;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.8;
+        overflow-y: auto;
+        max-height: 210px;
+        padding-right: 10px;
+        padding-left: 25px;
+        margin-top: 25px;
+      }
+
+      .testimonial-text::-webkit-scrollbar {
+        width: 6px;
+      }
+      .testimonial-text::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+      .testimonial-text::-webkit-scrollbar-thumb {
+        background: var(--brand-color);
+        border-radius: 10px;
+      }
+
+      .highlight {
+        background-color: var(--brand-light);
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .testimonial-author-wrapper {
+        border-top: 1px solid #f1f5f9;
+        padding-top: 20px;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        margin-left: 25px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-weight: 600;
+        color: white;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+      /* New avatar colors to match the blue theme */
+      .avatar-h {
+        background-color: #64748b;
+      } /* Slate */
+      .avatar-g {
+        background-color: #93c5fd;
+      } /* Light Blue */
+      .avatar-b {
+        background-color: #a78bfa;
+      } /* Violet */
+      .avatar-e {
+        background-color: #2dd4bf;
+      } /* Teal */
+
+      .author-info {
+        flex: 1;
+      }
+      .testimonial-author {
+        font-weight: 600;
+        color: #1ea1a1;
+        margin-bottom: 2px;
+        font-size: 1.1rem;
+      }
+      .testimonial-details {
+        color: #1ea1a1;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      .cta-section {
+        text-align: center;
+        margin-top: 30px;
+        padding: 0 20px;
+        flex-shrink: 0;
+      }
+      .cta-text {
+        font-size: 1.2rem;
+        color: var(--text-dark);
+        margin-bottom: 20px;
+      }
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--brand-color),
+          var(--brand-dark)
+        );
+        color: white;
+        padding: 14px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        border: none;
+        cursor: pointer;
+      }
+      .cta-button:hover {
+        background: linear-gradient(
+          135deg,
+          var(--brand-dark),
+          var(--brand-color)
+        );
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+      }
+      .cta-microcopy {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-top: 12px;
+        font-style: italic;
+      }
+      .swiper-pagination {
+        position: relative;
+        margin-top: 20px;
+      }
+      .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background-color: #cbd5e1;
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: var(--brand-color);
+        transform: scale(1.2);
+      }
+
+      /* --- Responsive Design --- */
+      @media (max-width: 992px) {
+        .swiper-slide,
+        .swiper-slide-active {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          overflow-y: auto;
+          height: auto;
+          background-attachment: scroll;
+        }
+        .testimonials-container {
+          height: auto;
+          padding: 40px 15px;
+        }
+        .testimonial-card {
+          max-height: none;
+        }
+        .testimonials-header h2 {
+          font-size: 2.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="testimonials-container">
+      <div class="testimonials-header">
+        <h2>What My Clients Say</h2>
+        <p>
+          Hear from those who have experienced the supportive, compassionate
+          space Jo creates in therapy.
+        </p>
+      </div>
+
+      <div class="carousel-container">
+        <div class="swiper testimonials-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <blockquote class="testimonial-text">
+                    Jo is an amazing lady! She's helped me
+                    <span class="highlight">regain some of my empowerment</span>
+                    and work towards
+                    <span class="highlight"
+                      >regaining my confidence and self esteem</span
+                    >! I couldn't have done it without her amazing advice and on
+                    going support!
+                  </blockquote>
+                  <div class="testimonial-author-wrapper">
+                    <div class="avatar avatar-h">H</div>
+                    <div class="author-info">
+                      <div class="testimonial-author">Hannah</div>
+                      <div class="testimonial-details">Aged 30-40, UK</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <blockquote class="testimonial-text">
+                    I met Jo at one of the lowest points in my life and quickly
+                    knew she was the person to help me
+                    <span class="highlight">find myself again</span>. Jo is
+                    kind, caring and made me feel at ease during all of our
+                    sessions. She helped me understand my anxiety by giving me
+                    space to talk.
+                  </blockquote>
+                  <div class="testimonial-author-wrapper">
+                    <div class="avatar avatar-g">G</div>
+                    <div class="author-info">
+                      <div class="testimonial-author">Gemma</div>
+                      <div class="testimonial-details">
+                        Aged 30-35, Nurse, UK
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <blockquote class="testimonial-text">
+                    It was a tough time emotionally for me... I spent 4 sessions
+                    with Jo and her counselling skills helped me to
+                    <span class="highlight">let go of the emotional pain</span>
+                    I had been holding on to during this time.
+                  </blockquote>
+                  <div class="testimonial-author-wrapper">
+                    <div class="avatar avatar-b">B</div>
+                    <div class="author-info">
+                      <div class="testimonial-author">Bryce</div>
+                      <div class="testimonial-details">
+                        Aged 45-60, Charity Fundraiser, UK
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-content">
+                  <blockquote class="testimonial-text">
+                    I would like to recommend Jo... When I first met Jo, I knew
+                    she was a special person. I looked forward to every session
+                    with Jo, it was like a
+                    <span class="highlight">breath of fresh air</span> leaving
+                    the room having left all my worries behind.
+                  </blockquote>
+                  <div class="testimonial-author-wrapper">
+                    <div class="avatar avatar-e">E</div>
+                    <div class="author-info">
+                      <div class="testimonial-author">Eleanor</div>
+                      <div class="testimonial-details">
+                        Aged 35-40, Business Owner, UK
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <p class="cta-text">Ready to begin your own healing journey?</p>
+        <a href="#" class="cta-button">Book a session with Jo →</a>
+        <p class="cta-microcopy">
+          Sessions available online and in-person. Confidential and
+          compassionate support.
+        </p>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      const swiper = new Swiper(".testimonials-swiper", {
+        // --- CORE SETTINGS ---
+        effect: "slide",
+        loop: true,
+        speed: 600,
+        grabCursor: true,
+        centeredSlides: true,
+
+        // --- AUTOPLAY ---
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+
+        // --- PAGINATION ---
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+
+        // --- RESPONSIVE SETTINGS ---
+        breakpoints: {
+          // Mobile (default view)
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          // Tablet
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          // Desktop
+          992: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
